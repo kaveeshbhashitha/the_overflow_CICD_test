@@ -1,1 +1,30 @@
 
+name: Basic CI Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify CI execution
+        run: |
+          echo "GitHub Actions CI started!"
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "CI pipeline is working!"
+
+      - name: Validate README
+        run: test -f README.md
+
+      - name: CI Success
+        run: echo "All CI checks passed!"
